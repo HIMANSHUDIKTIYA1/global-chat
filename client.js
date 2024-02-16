@@ -1,4 +1,21 @@
-const socket = io('http://localhost:8001');
+// Retrieve the port from the server URL, as provided by the deployment environment
+const socketUrl = new URL(window.location.origin);
+const socketPort = socketUrl.port || process.env.PORT || 8000; // Use environment variable or default to 8000
+
+// Create the Socket.IO connection using the dynamically determined port
+const socket = io(`http://${socketUrl.hostname}:${socketPort}`);
+
+// ... rest of your client-side code remains the same ...
+
+// Example usage:
+
+// Fetching the actual port at runtime (optional)
+socket.on('connect', () => {
+  const actualPort = socket.io.engine.port;
+  console.log(`Connected to server on port ${actualPort}`); // For debugging or logging
+});
+
+
 const form = document.getElementById('send-container');
 const MessageInput = document.getElementById('messageInp');
 const messageContainer = document.querySelector(".container");
