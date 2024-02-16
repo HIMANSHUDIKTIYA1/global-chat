@@ -1,6 +1,6 @@
-const express = require('express'); // You might already have this
-const app = express();
-const server = require('http').createServer(app);
+ // You might already have this
+
+const server = require('http');
 const io = require('socket.io')(server, { cors: { origin: "*" } });
 
 const users = {};
